@@ -1,0 +1,124 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Ex9 : MonoBehaviour
+{
+    private int tamanhoDoBaralho;
+    private List<int> baralho = new List<int>();
+    public Stack<int> baralhoPilha = new Stack<int>();
+    public Stack<int> resposta = new Stack<int>();
+    public int posicaoACortar;
+	// Use this for initialization
+	void Start ()
+    {
+        tamanhoDoBaralho = Random.Range(1, 10);
+        CriarBaralho(tamanhoDoBaralho);
+		string baralhoCriado = "baralhoCriado\t\t|";
+		foreach (int resposta in baralho)
+		{
+			baralhoCriado = baralhoCriado + resposta + "|";
+		}
+		print (baralhoCriado);
+
+        baralho = EmbaralharBaralho(baralho);
+        int[] baralhoArray;
+        baralhoArray = baralho.ToArray();
+        for (int i = 0; i < baralhoArray.Length; i++)
+        {
+            baralhoPilha.Push(baralhoArray[i]);
+        }
+		Imprimir ("BaralhoPilha", baralhoPilha);
+
+        resposta = CortarBaralho(baralhoPilha, tamanhoDoBaralho, posicaoACortar);
+
+		Imprimir ("Resposta", resposta);
+	}
+
+	void Imprimir(string nome, Stack<int> baralho)
+	{
+		nome = nome +"\t\t|";
+		foreach (int resposta in baralho)
+		{
+			nome = nome + resposta + "|";
+		}
+		print (nome);
+	}
+    Stack<int> CortarBaralho(Stack<int> entrada, int tamanhoDoBaralho, int posicaoACortar)
+    {
+        /*
+         * Ideia 1
+        int tamanhoDoTopo = tamanhoDoBaralho - posicaoACortar - 1;
+        int tamanhoDoFundo = tamanhoDoTopo - posicaoACortar - 1;
+        int[] topo = new int[tamanhoDoTopo], fundo = new int[tamanhoDoFundo];
+        for (int i = 0; i > topo.Length; i++)
+        {
+            topo[topo.Length - i - 1] = entrada.Pop();
+        }
+        for (int i = 0; i > topo.Length; i++)
+        {
+            topo[i] = entrada.Pop();
+        }
+        return entrada;
+        */
+
+
+
+        Stack<int> aux = new Stack<int>();
+        Stack<int> aux2 = new Stack<int>();
+        //int[] baralho = new int[entrada.Count];
+        //baralho = entrada.ToArray();
+
+        for (int i = 0; i < posicaoACortar; i++)
+        {
+            aux.Push(entrada.Pop());
+        }
+		Imprimir ("aux", aux);
+		int auxCount = aux.Count;
+        for (int i = 0; i < auxCount ; i++)
+        {
+            aux2.Push(aux.Pop());
+        }
+		Imprimir ("aux2", aux2);
+        Stack<int> aux3 = new Stack<int>();
+
+        for (int i = 0; i < entrada.Count; i++)
+        {
+            aux3.Push(entrada.Pop());
+        }
+		Imprimir ("aux3", aux3);
+		int aux2Count = aux2.Count;
+        for (int i = 0; i < aux2Count; i++)
+        {
+            aux3.Push(aux2.Pop());
+        }
+		Imprimir ("aux2", aux2);
+        return aux3;
+
+        //aux 2 está com o topo no fundo, com a ordem original
+
+    }
+
+	void CriarBaralho(int tamanho)
+    {
+        for (int i = 1; i <= tamanho; i++)
+        {
+            baralho.Add(i);
+        }
+    }
+    List<int> EmbaralharBaralho(List<int> entrada)
+    {
+        for (int i = 0; i < entrada.Count; i++)
+        {
+            int random = Random.Range(0, entrada.Count);
+            entrada.Add(entrada[random]);
+            entrada.RemoveAt(random);
+        }
+        return entrada;
+    }
+	// Update is called once per frame
+	void Update ()
+    {
+		
+	}
+}

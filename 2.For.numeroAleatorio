@@ -1,0 +1,43 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Ex02For : MonoBehaviour
+{
+
+    private int numMaior, numMenor, numNormal;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            numNormal = Random.Range(0, 101); // Gera o primeiro número aleatório de 0 a 100
+            // Primeiro número, atribua o valor ao maior e menor
+            numMaior = numNormal;
+            numMenor = numNormal;
+            for (int i = 2; i <= 50; i++)  // Laço de repetição do segundo ao quinquagésimo número
+            {
+                numNormal = Random.Range(0, 101); // Gera número aleatório de 0 a 100
+                Debug.Log("Número gerado: " + numNormal);
+
+                if (numNormal > numMaior) // Verifica se é o maior
+                {
+                    numMaior = numNormal;
+                }
+                if (numNormal < numMenor) // Verifica se é o menor
+                {
+                    numMenor = numNormal;
+                }
+            }
+            Debug.Log("Maior número: " + numMaior + " Menor número: " + numMenor); // Saída
+        }
+    }
+}
+

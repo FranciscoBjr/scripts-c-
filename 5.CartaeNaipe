@@ -1,0 +1,66 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+
+public class Carta
+{
+	private int numero;
+	private string naipe;
+
+	public Carta()
+	{
+		this.numero = 0;
+		this.naipe = "";
+	}
+
+	public Carta(int numero)
+	{
+		this.numero = numero;
+	}
+
+	public Carta(string naipe)
+	{
+		this.naipe = naipe;
+	}
+
+	public Carta(int numero, string naipe)
+	{
+		this.numero = numero;
+		this.naipe = naipe;
+	}
+
+	public override string ToString()
+	{
+		return string.Format ("{0}|{1}", numero, naipe);
+	}
+
+	public bool Equals(int numero, string naipe)
+	{
+		if (this.numero == numero && this.naipe == naipe) {
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public int GetNumero()
+	{
+		return this.numero;
+	}
+
+	public void SetNumero(int numero)
+	{
+		this.numero = numero;
+	}
+
+	public string GetNaipe()
+	{
+		return this.naipe;
+	}
+
+	public void SetNaipe(string naipe)
+	{
+		this.naipe = naipe;
+	}
+}

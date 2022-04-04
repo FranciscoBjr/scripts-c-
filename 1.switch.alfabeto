@@ -1,0 +1,50 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Ex01Switch : MonoBehaviour
+{
+    public char letra;
+    char res;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            switch(letra)
+            {
+                case 'a':
+                    Debug.Log("A é a primeira letra do alfabeto");
+                    break;
+                case 'b':
+                    Debug.Log("B é a segunda letra do alfabeto");
+                    break;
+                case 'c':
+                    Debug.Log("C é a Terceira  letra do alfabeto");
+                    break;
+                case 'd':
+                    Debug.Log("D é a Quarta letra do alfabeto");
+                    break;
+                case 'e':
+                    Debug.Log("E é a Quinta letra do alfabeto");
+                    break;
+                case 'f':
+                    Debug.Log("F é a Sexta letra do alfabeto");
+                    break;
+                case 'g':
+                    Debug.Log("G é a Sétima letra do alfabeto");
+                    break;            
+                default:
+                    Debug.Log("Letra inválida!!!");
+                    break;
+            }
+        }
+    }
+}

@@ -1,0 +1,66 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+
+public class Baralho 
+{
+	private List<Carta> baralho;
+
+	public Baralho()
+	{
+		baralho = new List<Carta>();
+		for (int i = 1; i <= 13; i++) 
+		{
+			baralho.Add(new Carta (i, "Ouros"));
+		}
+		for (int i = 1; i <= 13; i++) 
+		{
+			baralho.Add(new Carta (i,  "Copas"));
+		}
+		for (int i = 1; i <= 13; i++) 
+		{
+			baralho.Add(new Carta (i,  "Paus"));
+		}
+		for (int i = 1; i <= 13; i++) 
+		{
+			baralho.Add(new Carta (i,  "Espadas"));
+		}
+	}
+
+	public Baralho(List<Carta> baralho)
+	{
+		this.baralho = baralho;
+	}
+
+	public string ApresentarTodasAsCartasDoBaralho()
+	{
+		string saida = "";
+		foreach (Carta carta in baralho) 
+		{
+			/*print() -> Não é uma classe MonoBehavior, portanto não é possível utilizar print*/
+			saida = saida + "[" + carta.ToString () + "] ";
+		}
+		return saida;
+	}
+
+	public void EmbaralharCartas()
+	{
+		for (int i = 0; i < baralho.Count; i++) 
+		{
+			for (int j = 0; j < baralho.Count; j++) 
+			{
+				baralho.Reverse (i, j);
+			}
+			baralho.Reverse();
+		}
+	}
+
+	public List<Carta> GetBaralho()
+	{
+		return this.baralho;
+	}
+
+	public void SetBaralho(List<Carta> baralho)
+	{
+		this.baralho = baralho;
+	}
+}

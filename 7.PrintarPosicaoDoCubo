@@ -1,0 +1,68 @@
+﻿//Programado por: André Luiz Zanatto Bortolli (RA: 16236796) e Marcos Massao Riuto (RA: 17797333)
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class EstruturaDadosScript : MonoBehaviour
+{
+	public GameObject[] lElementos; // Este array guarda as referências dos GameObjects com tag "Cubo"
+	float[,] posicoesXY;  // Esta matriz guarda as posições x e y de cada cubo
+    float mediaX, mediaY;
+    public void AlinharEmX()
+    {
+        Reverter();
+        int i;
+        for (i = 0; i < lElementos.Length; i++)
+        {
+             lElementos[i].GetComponent<Transform>().position = new Vector2(mediaX, lElementos[i].transform.position.y);
+        }
+        //print("Alinhou em X");
+    }
+    public void AlinharEmY()
+    {
+        Reverter();
+        int i;
+        for (i = 0; i < lElementos.Length; i++)
+        {
+            lElementos[i].GetComponent<Transform>().position = new Vector2(lElementos[i].transform.position.x, mediaY);
+        }
+       //print("Alinhou em Y");
+    }
+    public void Reverter()
+    {
+        int i;
+        for (i = 0; i < lElementos.Length; i++)
+        {
+            lElementos[i].transform.position = new Vector2(posicoesXY[i, 0], posicoesXY[i, 1]);
+        }
+    }
+    void Start ()
+    {
+        lElementos = GameObject.FindGameObjectsWithTag("Cubo");
+        posicoesXY = new float[lElementos.Length, 2];
+        int i;
+        for (i = 0; i < lElementos.Length; i++)
+        {
+            mediaX = mediaX + lElementos[i].GetComponent<Transform>().position.x;
+            mediaY = mediaY + lElementos[i].GetComponent<Transform>().position.y;
+        }
+        mediaX = mediaX / lElementos.Length + 1;
+        mediaY = mediaY / lElementos.Length + 1;
+        for (i = 0; i < lElementos.Length; i++)
+        {
+            int j;
+            for (j = 0; j < 2; j++)
+            {
+                if (j == 0)
+                {
+                    posicoesXY[i, j] = lElementos[i].transform.position.x;
+                }
+                else if (j == 1)
+                {
+                    posicoesXY[i, j] = lElementos[i].transform.position.y;
+                }
+            }
+            //print(posicoesXY[i,0] + " - " + posicoesXY[i, 1]);
+        }
+    }
+}
